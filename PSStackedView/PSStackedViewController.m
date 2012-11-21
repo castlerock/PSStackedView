@@ -507,6 +507,9 @@ enum {
             // should we pan it to the right?
             if (dockRight) {
                 leftPos = [self screenWidth] - currentVC.containerView.width;
+
+//                if([self.visibleViewControllers count] == 2)
+//                    leftPos-=100;
             }
         }else if (idx > floatIndex) {
             // connect vc to left vc's right!
@@ -528,6 +531,24 @@ enum {
             [frames replaceObjectAtIndex:idx withObject:[NSValue valueWithCGRect:newrect]];
         }
     }];
+    
+    if([frames count])
+    {
+        CGRect crect = [[frames objectAtIndex:0] CGRectValue];
+        
+        if(crect.origin.x > self.largeLeftInset)
+        {
+            float x = self.largeLeftInset+1;
+            
+            for (int i = 0; i<[frames count]; i++) {
+                CGRect crect = [[frames objectAtIndex:i] CGRectValue];
+
+                CGRect newrect = CGRectMake(x, crect.origin.y, crect.size.width, crect.size.height);
+                [frames replaceObjectAtIndex:i withObject:[NSValue valueWithCGRect:newrect]];
+                x+= crect.size.width;
+            }
+        }
+    }
     
     return frames;
 }
