@@ -26,6 +26,12 @@
 /// viewController has been removed
 - (void)stackedView:(PSStackedViewController *)stackedView didRemoveViewController:(UIViewController *)viewController;
 
+/// viewController has been panned
+- (void)stackedView:(PSStackedViewController *)stackedView didPanViewController:(UIViewController *)viewController byOffset:(NSInteger)offset;
+
+/// viewController has been aligned (programmatically or by result of panning)
+- (void)stackedViewDidAlign:(PSStackedViewController *)stackedView;
+
 /// stackcontroller will pop off view controllers because of drag to right
 - (void)stackedView:(PSStackedViewController*)stackedView WillPopViewControllers:(NSArray*)controllers;
 

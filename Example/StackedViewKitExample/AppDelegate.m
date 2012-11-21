@@ -29,26 +29,14 @@
     self.stackController.enablePopOffOnDragRight = YES;
     self.stackController.popOffType = SVPopOptionAllButFirst;
     self.stackController.delegate = menuController;
+
+    // test to disable large inset
+    //self.stackController.largeLeftInset = self.stackController.leftInset;
+
     self.window.rootViewController = self.stackController;
     [self.window makeKeyAndVisible];
 
     return YES;
-}
-
-
-- (void)applicationWillResignActive:(UIApplication *)application; {
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
 }
 
 @end

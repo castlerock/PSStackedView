@@ -73,6 +73,10 @@ enum {
 /// expands/collapses stack until entered controller is topmost right
 - (BOOL)displayViewControllerOnRightMost:(UIViewController *)vc animated:(BOOL)animated;
 
+/// expand stack until root view is shown
+- (void)displayRootViewControllerAnimated:(BOOL)animated;
+
+
 /// return view controllers that follow a certain view controller. Helper function.
 - (NSArray *)viewControllersAfterViewController:(UIViewController *)viewController;
 
@@ -83,7 +87,7 @@ enum {
 @property(nonatomic, unsafe_unretained) id<PSStackedViewDelegate> delegate;
 
 /// root view controller, always displayed behind stack
-@property(nonatomic, strong, readonly) UIViewController *rootViewController;
+@property(nonatomic, strong) IBOutlet UIViewController *rootViewController;
 
 /// The top(last) view controller on the stack.
 @property(nonatomic, readonly, strong) UIViewController *topViewController;
@@ -126,6 +130,27 @@ enum {
 
 /// Property to determine the distance the stack has to be dragged to the right to trigger popOff
 @property(nonatomic, assign) NSInteger popOffDragDistance;
+
+/// Property to disable shadows
+@property(nonatomic, assign) BOOL enableShadows;
+
+/// Property to disable dragging past left insets, recommend setting enableBouces to NO when this is set to NO
+@property(nonatomic, assign) BOOL enableDraggingPastInsets;
+
+/// enable scaling while fade in/out
+@property(nonatomic, assign) BOOL enableScalingFadeInOut;
+
+/// shadow width
+@property(nonatomic, assign) CGFloat defaultShadowWidth;
+
+/// shadow alpha
+@property(nonatomic, assign) CGFloat defaultShadowAlpha;
+
+/// corner radius
+@property(nonatomic, assign) CGFloat cornerRadius;
+
+///number of touches
+@property(nonatomic, assign) NSUInteger numberOfTouches;
 
 /// left inset thats always visible. Defaults to 60.
 @property(nonatomic, assign) NSUInteger leftInset;
