@@ -14,18 +14,23 @@
 
 - (void)perform
 {
-    if (!PSIsIpad() && [(UINavigationController *)self.sourceViewController navigationController])
+    if (!PSIsIpad() && [(UIViewController *)self.sourceViewController navigationController])
     {
-        [[(UINavigationController *)self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:YES];
+        [[(UIViewController *)self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:YES];
     }
     else
     {
         PSStackedViewController* stackController = [self.sourceViewController stackController];
 
         if (nil == stackController)
-            stackController = [((UIViewController *)self.sourceViewController).parentViewController stackController];
+         stackController = [((UIViewController *)self.sourceViewController).parentViewController stackController];
 
-        [stackController pushViewController:self.destinationViewController fromViewController:self.sourceViewController animated:YES];
+
+        UIViewController *sourceVC = (UIViewController *)self.sourceViewController;
+        if (((UIViewController *)self.sourceViewController).navigationController)
+         sourceVC = ((UIViewController *)self.sourceViewController).navigationController;
+
+        [stackController pushViewController:self.destinationViewController fromViewController:sourceVC animated:YES];
     }
 }
 
