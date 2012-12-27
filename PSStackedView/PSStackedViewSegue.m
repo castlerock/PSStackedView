@@ -16,6 +16,7 @@
 {
     if (!PSIsIpad() && [(UIViewController *)self.sourceViewController navigationController])
     {
+        [[(UIViewController *)self.sourceViewController navigationController] popToViewController:self.sourceViewController animated:NO];
         [[(UIViewController *)self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:YES];
     }
     else
