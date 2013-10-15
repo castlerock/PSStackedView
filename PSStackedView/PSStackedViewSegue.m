@@ -12,9 +12,27 @@
 
 @implementation PSStackedViewSegue
 
-- (void)perform {
-    PSStackedViewController* stackController = [self.sourceViewController stackController];
-    [stackController pushViewController:self.destinationViewController fromViewController:self.sourceViewController animated:YES];
+- (void)perform
+{
+    if (!PSIsIpad() && [(UIViewController *)self.sourceViewController navigationController])
+    {
+        [[(UIViewController *)self.sourceViewController navigationController] popToViewController:self.sourceViewController animated:NO];
+        [[(UIViewController *)self.sourceViewController navigationController] pushViewController:self.destinationViewController animated:YES];
+    }
+    else
+    {
+        PSStackedViewController* stackController = [self.sourceViewController stackController];
+
+        if (nil == stackController)
+         stackController = [((UIViewController *)self.sourceViewController).parentViewController stackController];
+
+
+        UIViewController *sourceVC = (UIViewController *)self.sourceViewController;
+        if (((UIViewController *)self.sourceViewController).navigationController)
+         sourceVC = ((UIViewController *)self.sourceViewController).navigationController;
+
+        [stackController pushViewController:self.destinationViewController fromViewController:sourceVC animated:YES];
+    }
 }
 
 @end
