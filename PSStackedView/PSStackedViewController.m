@@ -1117,6 +1117,11 @@ enum {
             container.transform = CGAffineTransformMakeScale(1.2, 1.2); // large but fade in
     }
     
+		CGFloat heightGap = 0.0;
+		if([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending) {
+			heightGap = 20.0;
+		}
+		container.center = CGPointMake(container.center.x, container.center.y + heightGap);
     [self.view addSubview:container];
     
     if (animated) {
